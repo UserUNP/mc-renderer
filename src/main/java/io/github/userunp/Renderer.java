@@ -57,7 +57,7 @@ public class Renderer {
 
     @FunctionalInterface
     public interface PixelGetter {
-        int get(int index);
+        int get(int x, int y);
     }
 
     public class Surface {
@@ -113,7 +113,7 @@ public class Renderer {
         private boolean next() {
             if (stopped) return true;
             if (y >= evenHeight) x = y = 0;
-            int pixel = getter.get(y * width + x);
+            int pixel = getter.get(x, y);
             SurfaceField field = fields[(y % 2) * 2 + (x % 2)];
             boolean fieldFinished;
             if (isPixelVisible(pixel, this)) fieldFinished = field.next(getColor(pixel));
